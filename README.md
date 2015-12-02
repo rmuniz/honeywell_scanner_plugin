@@ -11,7 +11,7 @@ Honeywell Dolphin 70E Barcode Scanner plugin for Cordova / PhoneGap.
 
 ### Install
 
-	cordova plugin add org.pluginporo.honeywell_scanner_plugin
+	cordova plugin add https://github.com/rmuniz/honeywell_scanner_plugin.git
 
 ### Scan
 
