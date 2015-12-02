@@ -117,9 +117,9 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 	    JSONObject obj = new JSONObject();
 	    try {
 	      obj.put("barcode", barcode);
-	      obj.put('length',length);
-	      obj.put('aimid',new String(aimid,'UTF-8'));
-	      obj.put('codeid',new String(codeid,'UTF-8'));
+	      obj.put("length",length);
+	      obj.put("aimid",new String(aimid,"UTF-8"));
+	      obj.put("codeid",new String(codeid,"UTF-8"));
 	      if(dl != null){
 	      	obj.put("dln", dl.getDriverLicenseNumber());
 	      	obj.put("first_name", dl.getFirstName());
