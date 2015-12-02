@@ -49,7 +49,7 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 		if (action.equals("scan")) {
 			this.pluginCallbackContext = callbackContext;
 
-			if ((decodeManager == null) && (Build.MODEL.toLowerCase().contains("dolphin 70e".toLowerCase()))) {
+			if ((decodeManager == null) && (Build.MODEL.toLowerCase().contains("dolphin 70e".toLowerCase())) || Build.MODEL.toLowerCase().contains("dolphin 75e".toLowerCase()))) {
 				decodeManager = new DecodeManager(((CordovaActivity)this.cordova.getActivity()), ScanResultHandler);
 			}
 			try {
@@ -78,12 +78,12 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 				byte aimid = decodeResult.aimId;
 				int iLength = decodeResult.length;
 				String r = decodeResult.barcodeData;
-				sendUpdate(getScannedInfo(r), false);
+				sendUpdate(getScannedInfo(r,iLength,aimid,codeid), false);
 				pluginCallbackContext.success("done");
 				break;
-			case DecodeManager.MESSAGE_DECODER_FAIL: 
+			case DecodeManager.MESSAGE_DECODER_FAIL:
 				break;
-			case DecodeManager.MESSAGE_DECODER_READY: 
+			case DecodeManager.MESSAGE_DECODER_READY:
 				ArrayList<java.lang.Integer> arry = decodeManager.getSymConfigActivityOpeartor().getAllSymbologyId();
 				boolean b = arry.isEmpty();
 				break;
@@ -112,11 +112,14 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 		}
 	}
 
-	private JSONObject getScannedInfo(String barcode) {
+	private JSONObject getScannedInfo(String barcode,int length,byte aimid,byte codeid) {
 		DriverLicense dl = parseDL(barcode);
 	    JSONObject obj = new JSONObject();
 	    try {
 	      obj.put("barcode", barcode);
+	      obj.put('length',length);
+	      obj.put('aimid',new String(aimid,'UTF-8'));
+	      obj.put('codeid',new String(codeid,'UTF-8'));
 	      if(dl != null){
 	      	obj.put("dln", dl.getDriverLicenseNumber());
 	      	obj.put("first_name", dl.getFirstName());
