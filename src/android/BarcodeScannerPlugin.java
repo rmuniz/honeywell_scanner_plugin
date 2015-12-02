@@ -49,7 +49,7 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 		if (action.equals("scan")) {
 			this.pluginCallbackContext = callbackContext;
 
-			if ((decodeManager == null) && (Build.MODEL.toLowerCase().contains("dolphin 70e".toLowerCase())) || Build.MODEL.toLowerCase().contains("dolphin 75e".toLowerCase()))) {
+			if ((decodeManager == null) && (Build.MODEL.toLowerCase().contains("dolphin 70e".toLowerCase()) || Build.MODEL.toLowerCase().contains("dolphin 75e".toLowerCase()))) {
 				decodeManager = new DecodeManager(((CordovaActivity)this.cordova.getActivity()), ScanResultHandler);
 			}
 			try {
