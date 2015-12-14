@@ -49,6 +49,7 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 		if (action.equals("scan")) {
 			this.pluginCallbackContext = callbackContext;
 
+			Log.e(LOG_TAG, Build.MODEL.toLowerCase(), e);
 			if ((decodeManager == null) && (Build.MODEL.toLowerCase().contains("dolphin 70e".toLowerCase()) || Build.MODEL.toLowerCase().contains("dolphin 75e".toLowerCase()))) {
 				decodeManager = new DecodeManager(((CordovaActivity)this.cordova.getActivity()), ScanResultHandler);
 			}
@@ -118,8 +119,8 @@ public class BarcodeScannerPlugin extends CordovaPlugin {
 	    try {
 	      obj.put("barcode", barcode);
 	      obj.put("length",length);
-	      obj.put("aimid",new String(aimid,"UTF-8"));
-	      obj.put("codeid",new String(codeid,"UTF-8"));
+	      obj.put("aimid",String.format("%c", aimid));
+	      obj.put("codeid",String.format("%c", codeid));
 	      if(dl != null){
 	      	obj.put("dln", dl.getDriverLicenseNumber());
 	      	obj.put("first_name", dl.getFirstName());
